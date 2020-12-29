@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ master ]
+    branches: '*'
   pull_request:
-    branches: [ master ]
+    branches: '*'
 
 env:
   IMAGE_NAME: dayan/php
@@ -18,8 +18,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: docker login
+      env:
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
-        echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
+        echo "$DOCKER_PASSWORD" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag $IMAGE_NAME:latest
       
