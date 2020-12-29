@@ -15,4 +15,6 @@ RUN mv composer.phar /usr/local/bin/composer
 
 # for the liquibase
 RUN mkdir /usr/share/man/man1/
-RUN apt install -y default-jre
+RUN apt-get install -y default-jre
+
+RUN apt-get install -y postgresql-client
