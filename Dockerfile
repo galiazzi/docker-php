@@ -18,3 +18,8 @@ RUN mkdir /usr/share/man/man1/
 RUN apt-get install -y default-jre
 
 RUN apt-get install -y postgresql-client
+
+# node and npm
+RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash -
+RUN apt-get install -y nodejs
+
