@@ -11,8 +11,9 @@ RUN docker-php-ext-install pgsql pdo_pgsql curl json intl gd xml soap
 RUN docker-php-ext-install zip
 RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg
 
-RUN pecl install imagick \
-  && docker-php-ext-enable imagick
+RUN apt install -yqq imagemagick
+RUN pecl install imagick
+RUN docker-php-ext-enable imagick
 
 # composer
 RUN curl -sS https://getcomposer.org/installer | php
