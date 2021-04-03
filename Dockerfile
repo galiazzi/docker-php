@@ -17,7 +17,7 @@ RUN pecl install imagick
 RUN docker-php-ext-enable imagick
 
 RUN pecl install mongodb
-RUN echo "extension=mongo.so" > /usr/local/etc/php/conf.d/mongo.ini
+RUN echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongo.ini
 
 # composer
 RUN curl -sS https://getcomposer.org/installer | php
