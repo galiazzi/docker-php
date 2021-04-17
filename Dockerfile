@@ -7,6 +7,7 @@ RUN apt-get install -yqq git libmcrypt-dev libpq-dev libcurl4-gnutls-dev libicu-
   libpcre3-dev libtidy-dev libzip-dev
 RUN apt-get install -y rsync
 
+RUN docker-php-ext-install bcmath
 RUN docker-php-ext-install pgsql pdo_pgsql curl json intl gd xml soap
 RUN docker-php-ext-install zip
 RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg
