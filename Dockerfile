@@ -11,6 +11,7 @@ RUN docker-php-ext-install bcmath
 RUN docker-php-ext-install pgsql pdo_pgsql curl json intl gd xml soap
 RUN docker-php-ext-install zip
 RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg
+RUN docker-php-ext-install sockets
 
 RUN apt-get install -y libmagickwand-dev libmagickcore-dev
 RUN apt-get install -y imagemagick
