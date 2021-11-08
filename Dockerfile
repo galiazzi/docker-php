@@ -8,7 +8,7 @@ RUN apt-get install -yqq git libmcrypt-dev libpq-dev libcurl4-gnutls-dev libicu-
   rsync postgresql-client
 
 RUN docker-php-ext-install bcmath zip sockets
-RUN docker-php-ext-install pgsql pdo_pgsql curl json intl gd xml soap
+RUN docker-php-ext-install pgsql pdo_pgsql curl intl gd xml soap
 RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg
 
 RUN apt-get install -y libmagickwand-dev libmagickcore-dev imagemagick
