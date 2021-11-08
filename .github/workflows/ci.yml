@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ main, "7.4" ]
+    branches: [ "*" ]
   pull_request:
-    branches: [ main, "7.4" ]
+    branches: [ "*" ]
 
 env:
   IMAGE_NAME: dayan/php
