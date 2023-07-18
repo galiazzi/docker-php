@@ -1,4 +1,4 @@
-FROM php:8.0
+FROM php:8.2
 
 RUN apt-get update -yqq
 RUN apt-get install -yqq git libmcrypt-dev libpq-dev libcurl4-gnutls-dev libicu-dev libvpx-dev \
