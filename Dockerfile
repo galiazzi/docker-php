@@ -7,26 +7,23 @@ RUN apt-get install -yqq git libmcrypt-dev libpq-dev libcurl4-gnutls-dev libicu-
   libpcre3-dev libtidy-dev libzip-dev \
   rsync postgresql-client
 
-RUN docker-php-ext-install bcmath zip sockets
-RUN docker-php-ext-install pgsql pdo_pgsql curl intl gd xml soap
-RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg
+RUN docker-php-ext-install bcmath zip sockets pgsql pdo_pgsql curl intl gd xml soap \
+    && docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg
 
-RUN apt-get install -y libmagickwand-dev libmagickcore-dev imagemagick
-RUN pecl install imagick
-RUN docker-php-ext-enable imagick
+RUN apt-get install -y libmagickwand-dev libmagickcore-dev imagemagick \
+    && pecl install imagick \
+    && docker-php-ext-enable imagick
 
-RUN pecl install mongodb
-RUN echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongo.ini
+RUN pecl install mongodb \
+    && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongo.ini
 
-# composer
-RUN curl -sS https://getcomposer.org/installer | php
-RUN mv composer.phar /usr/local/bin/composer
+# Composer
+RUN curl -sS https://getcomposer.org/installer | php \
+  && mv composer.phar /usr/local/bin/composer
 
-# for the liquibase
-RUN mkdir -p /usr/share/man/man1/
-RUN apt-get install -y default-jre
+# Node and npm
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
 
-# node and npm
-RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash -
-RUN apt-get install -y nodejs
-
+# For the liquibase
+RUN mkdir -p /usr/share/man/man1/ && apt install -y default-jre
