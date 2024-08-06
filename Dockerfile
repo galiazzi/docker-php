@@ -4,11 +4,15 @@ RUN apt-get update -yqq
 RUN apt-get install -yqq git libmcrypt-dev libpq-dev libcurl4-gnutls-dev libicu-dev libvpx-dev \
   libjpeg-dev libpng-dev libxpm-dev zlib1g-dev libfreetype6-dev libxml2-dev libexpat1-dev \
   libbz2-dev libgmp3-dev libldap2-dev unixodbc-dev libsqlite3-dev libaspell-dev libsnmp-dev \
-  libpcre3-dev libtidy-dev libzip-dev \
+  libpcre3-dev libtidy-dev libzip-dev libwebp-dev \
   rsync postgresql-client
 
 RUN docker-php-ext-install bcmath zip sockets pgsql pdo_pgsql curl intl gd xml soap \
-    && docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg
+    && docker-php-ext-configure pcntl --enable-pcntl \
+    && docker-php-ext-install pcntl \
+    && docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-webp \
+    && docker-php-ext-install gd \
+    && docker-php-ext-install exif
 
 RUN apt-get install -y libmagickwand-dev libmagickcore-dev imagemagick \
     && pecl install imagick \
