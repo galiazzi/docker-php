@@ -17,13 +17,13 @@ RUN apt-get install -y libmagickwand-dev libmagickcore-dev imagemagick \
 RUN pecl install mongodb \
     && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongo.ini
 
+# For the liquibase
+RUN mkdir -p /usr/share/man/man1/ && apt install -y default-jre
+
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php \
   && mv composer.phar /usr/local/bin/composer
 
 # Node and npm
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y nodejs
-
-# For the liquibase
-RUN mkdir -p /usr/share/man/man1/ && apt install -y default-jre
